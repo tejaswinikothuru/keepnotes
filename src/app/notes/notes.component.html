@@ -1,0 +1,25 @@
+<div class="containerNav">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="container">
+  <h3 class="text-primary" style="margin-left: 350px; margin-right:350px; padding:20px"><marquee> All your Notes are here </marquee></h3>
+  <div class="row mt-3">
+    <div class="card-group">
+      <div class="col-md-3 m-auto pb-5" *ngFor="let note of notesdata; let ind=index">
+        <div class="card  shadow" style="width: 18rem;">
+          <div class="card-body">
+            <h4 class="card-title text-center text-secondary">{{note.title}}</h4>
+            <p class="card-text text-center ">{{note.description}}</p>
+          </div>
+          <div class="icons p-3 d-flex justify-content-between">
+            <a class=" mt-2 bi bi-alarm-fill fs-5 text-warning" title="Reminder" (click)="remindNote(note)"></a>
+            <a class=" mt-2 bi bi-suit-heart-fill fs-5 text-danger" title="Favourites" (click)="favouriteNote(note)"></a>
+            <a class="mt-2 bi bi-arrow-down-square-fill fs-5 text-secondary" title="Archive" (click)="archiveNote(note,ind)"></a>
+            <a class="  mt-2 bi bi-trash-fill fs-5 text-primary" title="Trash" (click)="trashNote(note,ind)"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

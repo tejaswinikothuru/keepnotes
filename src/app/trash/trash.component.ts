@@ -1,0 +1,62 @@
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { NotesService } from '../notes.service';
+
+@Component({
+  selector: 'app-trash',
+  templateUrl: './trash.component.html',
+  styleUrls: ['./trash.component.css']
+})
+export class TrashComponent implements OnInit {
+
+  trashData=[];
+
+  constructor(private ns:NotesService,private TS:ToastrService) { }
+
+  ngOnInit(): void {
+    this.ns.getDeletedNotes().subscribe(res=>{
+      this.trashData=res["message"]
+       //if token not exists or session expired
+       if(res["message"]=="failed")
+       {
+         alert(res["reason"])
+       }
+       //if token exists
+       else{
+         if(this.trashData.length==0){
+           this.TS.info("Trash is empty")
+          }
+       }
+   },err=>{console.log(err)})
+  }
+ 
+
+  restoreNote(restoreObj,ind){
+    this.ns.restoreNotes(restoreObj).subscribe(res=>{
+     if(res["message"]=="failed"){
+       alert(res["reason"])
+     }
+     else{
+      if(res["message"]=="note restored"){
+        this.trashData.splice(ind,1)
+        this.TS.success("Restored")
+      }
+     }
+    },err=>{
+      alert("something wrong")
+      console.log(err)
+    })
+  }
+  permanentDelete(delObj,ind){
+    console.log(delObj)
+    this.ns.permanentDelete(delObj).subscribe(res=>{
+      if(res["message"]=="deleted permanetly"){
+        this.trashData.splice(ind,1)
+        this.TS.warning("Deleted permanently")
+      }
+    },err=>{
+      alert("something wrong")
+      console.log(err)
+    })
+  }
+}

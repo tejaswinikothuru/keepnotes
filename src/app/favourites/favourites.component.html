@@ -1,0 +1,22 @@
+<div class="containerNav">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="container">
+  <div class="row mt-3">
+    <div class="card-group">
+      <div class="col-md-3 m-auto pb-5" *ngFor="let favourite of favouritesData; let ind=index">
+        <div class="card  shadow" style="width: 18rem;">
+          <div class="card-body ">
+            <h4 class="card-title text-center text-secondary">{{favourite.title}}</h4>
+            <p class="card-text text-center ">{{favourite.description}}</p>
+          </div>
+          <div class="icons p-3 text-center">
+            <a class=" mt-2 bi bi-suit-heart fs-5 text-danger" title="Remove from Favourites" (click)="remFavNote(favourite,ind)"></a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>

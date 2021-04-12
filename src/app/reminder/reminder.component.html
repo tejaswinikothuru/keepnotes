@@ -1,0 +1,23 @@
+<div class="containerNav">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="container">
+  <div class="row mt-3">
+    <div class="card-group">
+      <div class="col-md-3 m-auto pb-5" *ngFor="let reminder of reminderData; let ind=index">
+        <div class="card  shadow" style="width: 18rem;">
+          <div class="card-body ">
+            <h4 class="card-title text-center text-secondary">{{reminder.title}}</h4>
+            <p class="card-text text-center ">{{reminder.description}}</p>
+          </div>
+          <div class="icons p-3 text-center">
+            <a type="submit" class="mt-2 bi bi-bell fs-5 text-danger" title="Remove from reminder" (click)="unremNote(reminder,ind)"></a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+<router-outlet></router-outlet>

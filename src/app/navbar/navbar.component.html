@@ -1,0 +1,53 @@
+<header>
+  <!-------------------------------------------nav bar start ----------------------------------------------------------------->
+  <nav class="navbar navbar-light  justify-content-between p-2">
+
+    <!-------------------------------------------toggler for sidebar--------------------------------------------------->
+    <div>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#target" aria-pressed="false"
+        autocomplete="off">
+        <span class="bi bi-list fs-1 text-light"></span>
+      </button>
+      &nbsp;
+    </div>
+
+    <!------------------------------------------------ Heading --------------------------------------------------------->
+    <div>
+      <p class="navbar-brand p-3 fw-bolder bg-light" style="font-size:50px; font-weight: 600;" class="rainbow-text">
+        <img src="../assets/logokn.png" style="height: 65px; width: 85px;">
+        Keep Notes</p>
+    </div>
+
+
+    <div class="d-flex inline">
+      <a routerLink="" (click)="gotoHome()"><i class="bi bi-house-door-fill text-light"></i><br><span class="text-light"></span></a>
+      <p class="fs-3 text-light" style="font-style: italic;"><span class="bi bi-person-circle"></span>Welcome, {{username}}</p>
+    </div>
+
+  </nav>
+  <!--------------------------------------------------------navbar end ---------------------------------------------------->
+
+  <!-------------------------------------------------------sidebar start------------------------------------------------------->
+  <div class="collapse navbar-collapse sidebar" id="target">
+     <div>
+      <p class="fs-3">Keep Notes</p>
+      <img class="px-5" src="../assets/logosb.png" style="height: 150px; width: 250px;">
+      <p class="text-light">{{email}}</p>
+     </div>
+   
+    <a routerLink="" (click)="note()"><i class="bi bi-journals"></i><span>Notes</span></a>
+    <a routerLink="" (click)="reminder()"><i class="bi bi-bell"></i><span>Reminder</span></a>
+    <a routerLink="" (click)="favourite()"><i class="bi bi-bookmark-heart-fill"></i><span>Favourites</span></a>
+    <a routerLink="" (click)="archive()"><i class="bi bi-file-arrow-down"></i><span>Archive</span></a>
+    <a routerLink="" (click)="trash() "><i class="bi bi-trash"></i><span>Trash</span></a>
+    <a routerLink="" (click)="signOut()"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></a>
+    <!----<a routerLink="" (click)="help()"><span>Help</span></a>-->
+  </div>
+  <!-------------------------------------------------sidebar end------------------------------------------------============-->
+</header>
+<!--header area end-->
+
+
+
+
+<router-outlet></router-outlet>

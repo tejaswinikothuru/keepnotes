@@ -1,0 +1,97 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 m-auto">
+            <div class="shadow bg-transparent slide-in-elliptic-top-fwd mt-4">
+              <!------------------------------------------------------heading---------------------------------------------->
+              <h1 class="text-center mt-2 text-light">Create Account</h1>
+
+              <!-------------------------------------------------------form------------------------------------------------>
+              <form [formGroup]="signup" (ngSubmit)="submit()" class="p-5">
+
+                <!-------------------------------------------------first name---------------------------------------------->
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control border border-dark" id="fname" name="firstName" placeholder="First Name" formControlName="firstName">
+                  <label for="fname">First Name</label>
+                </div>
+                <div *ngIf="submitted || getControls().firstName.touched && getControls().firstName.invalid">
+                  <p *ngIf="getControls().firstName.errors?.required"   class="text-end" style="color:#05b396">Please enter Your first name</p>
+                  <p *ngIf="getControls().firstName.errors?.minlength"  class="text-end" style="color:#05b396">Minimum 3 Characters</p>
+                </div>
+
+                <!------------------------------------------------last name------------------------------------------------>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control border border-dark" id="lname" name="lastName" placeholder="Last Name" formControlName="lastName">
+                  <label for="floatingInput">Last Name</label>
+                </div>
+                <div *ngIf="submitted || getControls().lastName.touched && getControls().lastName.invalid">
+                  <p *ngIf="getControls().lastName.errors?.required"  class="text-end" style="color:#05b396">Please enter Your last name</p>
+                  <p *ngIf="getControls().lastName.errors?.minlength"  class="text-end" style="color:#05b396">Minimum 3 characters</p>
+                </div>
+
+                <!-------------------------------------------------gender------------------------------------------------->
+                <div class="mb-3">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" value="male" id="male" formControlName="gender">
+                    <label class="form-check-label text-light fs-4" for="male">
+                      Male
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" value="female" id="female" formControlName="gender">
+                    <label class="form-check-label text-light fs-4" for="gender">
+                      Female
+                    </label>
+                </div>
+                <div *ngIf="submitted || getControls().gender.touched && getControls().gender.invalid">
+                  <p *ngIf="getControls().gender.errors?.required"  class="text-end"  style="color:#05b396">Please enter gender</p>
+                </div>
+                </div>
+
+                <!-------------------------------------------------date of birth------------------------------------------>
+                <div class="form-floating mb-3">
+                  <input type="date" class="form-control border border-dark" id="dob" name="dateOfBirth" placeholder="Date Of Birth" formControlName="dob">
+                  <label for="dob">Date Of Birth</label>
+                </div>
+                <div *ngIf="submitted || getControls().dob.touched && getControls().dob.invalid">
+                  <p *ngIf="getControls().dob.errors?.required"   class="text-end" style="color:#05b396">Please enter Date Of Birth</p>
+                </div>
+
+                <!---------------------------------------------------email--------------------------------------------------->
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control border border-dark" id="email" name="email" placeholder="Email" formControlName="email">
+                  <label for="floatingInput">Email address</label>
+                </div>
+                <div *ngIf="submitted || getControls().email.touched && getControls().email.invalid">
+                  <p *ngIf="getControls().email.errors?.required"  class="text-end"  style="color:#05b396">Please enter Email address</p>
+                </div>
+
+                <!------------------------------------------------password-------------------------------------------------->
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control border border-dark" id="password" name="password" placeholder="Password" formControlName="password">
+                  <label for="password">Password</label>
+                  <div class="form-text">* Password should contain minimum 6 char with one capital letter and one digit</div>
+                </div>
+                <div *ngIf="submitted || getControls().password.touched && getControls().password.invalid">
+                  <p *ngIf="getControls().password.errors?.required"   class="text-end" style="color:#05b396">Please enter password</p>
+                  <p *ngIf="getControls().password.errors?.minlength || getControls().password.errors?.pattern "  class="text-end" style="color:#05b396">Password invalid</p>
+                </div>
+
+                <!------------------------------------------------confirm -------------------------------------------------->
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control border border-dark" id="confirmPassword" placeholder="Password" formControlName="cpassword">
+                  <label for="confirmPassword">Confirm Password</label>
+                </div>
+                <div *ngIf="submitted || getControls().cpassword.touched && getControls().cpassword.invalid">
+                  <p *ngIf="getControls().cpassword.errors?.required"  class="text-end" style="color:#05b396">Confirm Password</p>
+                </div>
+                <div *ngIf="getControls().cpassword.valid && getControls().cpassword.value != getControls().password.value"  class="text-end" style="color:#05b396">password not matched</div>
+                   
+                <!------------------------------------------------sign up button----------------------------------------------->
+                    <div class="button text-center">
+                      <button class="btn fs-4 mt-2 text-light" style="font-style: italic;">Sign Up</button>
+                    </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

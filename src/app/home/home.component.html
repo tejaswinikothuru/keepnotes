@@ -1,0 +1,61 @@
+<!--------------------------navbar container-------------------->
+<div class="containerNav">
+  <app-navbar></app-navbar>
+</div>
+
+
+<!---------------------------------------------------->
+<div class="container">
+  <!--------------------click to add note button-------------------------->
+  <div class="text-center">
+    <button class="btn btn-outline fs-2 bi bi-plus text-pop-up-top ml-5" (click)="createNote()"
+      style="font-style: italic;">Click To Add Note</button>
+  </div>
+
+  <!----------------------note creating area-------------------------->
+  <div class="row">
+    <div class="col-md-4 m-auto">
+      <div *ngIf="visible==true" class="border-primary shadow">
+        <!---form--->
+        <form #ref="ngForm" class="p-5">
+          <label>Title</label>
+          <input type="text" class="input" name="title" ngModel>
+          <label>Description</label>
+          <textarea type="text" class="input" name="description" ngModel></textarea>
+          <!--icons-->
+          <div class="d-flex justify-content-between">
+            <a type="submit" class=" mt-2 bi bi-patch-check-fill  fs-3 text-success" title="Save" (click)="saveNote(ref)"></a>
+            <a type="submit" class=" mt-2  bi bi-alarm-fill fs-3 text-warning" title="Reminder" (click)="remindNote(ref)"></a>
+            <a type="submit" class=" mt-2 bi bi-suit-heart-fill fs-3 text-danger" title="Favourites" (click)="favouriteNote(ref)"></a>
+            <a class=" mt-2 bi bi-x-circle-fill fs-3 text-primary" title="Cancel" (click)="cancelNote()"></a>
+          </div>
+
+        </form>
+<!---------------------------------------------reminder----------------------------->
+
+
+
+</div>
+</div>
+</div>
+
+<div class="row mt-5">
+<div class="col-md-4 ">
+<img  src="/assets/card1.png"  alt="Card image">
+</div>
+
+<div class="col-md-4 ">
+<img  src="/assets/card2.png"  alt="Card image">
+</div>
+
+<div class="col-md-4 ">
+<img src="/assets/card3.png"  alt="Card image">
+</div>
+
+</div>
+
+
+</div>
+
+
+<router-outlet></router-outlet>
