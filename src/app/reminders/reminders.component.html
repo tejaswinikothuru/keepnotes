@@ -1,0 +1,39 @@
+<div class="containerNav" style="z-index: 2;">
+    <app-navbar></app-navbar>
+  </div>
+  
+  <div class="container mt-5" style="z-index: 1;">
+    <h3 *ngIf="reminderHeading==true" class="text-primary text-center display-4 tracking-in-contract">Reminders appear here</h3>
+    <div class="row mt-3">
+      <div class="card-group">
+        <div class="col-md-3 m-auto pb-5" *ngFor="let reminder of reminderData; let ind=index">
+          <div class="card  shadow" style="width: 18rem;">
+            <div class="card-body ">
+              <h4 class="card-title text-center" style="font-family: 'Courgette', cursive;">{{reminder.title}}</h4>
+              <p class="card-text text-center fs-5" style="font-family: 'Courgette', cursive;">{{reminder.description}}</p>
+              <div *ngFor="let check of reminder.checkList; let ind=index" class="px-3 fs-5"  style="font-family: 'Courgette', cursive;">
+                <input type="checkbox" name="check" ngModel value="check" (click)="checked(check,reminder.title)"> {{check}}
+               </div>
+
+               <div *ngIf="reminder.checkedList.length">
+                <hr>
+                <h5 style="font-family: 'Courgette', cursive;">Checked list</h5>
+                <div *ngFor="let checked of reminder.checkedList; let ind=index"  class="px-3  fs-5" style="font-family: 'Courgette', cursive;">
+                  <input type="checkbox" name="checked" ngModel value="checked"  (click)="uncheck(checked,reminder.title)" ><del> {{checked}}</del>
+                 </div>
+               </div>
+            </div>
+            <div class="icons p-3 text-center">
+              <a type="submit" class="mt-2 bi bi-alarm fs-5 " title="Remove from reminder" style="color:rgb(240, 135, 44)" (click)="unremNote(reminder,ind)"></a>
+            </div>
+
+           
+  
+          </div>
+  
+        </div>
+      </div>
+      <div *ngIf="emptyRemainders==true">
+        <p class="display-5 text-center text-secondary mt-5 p-5">Your Reminders is empty</p>
+      </div>
+    </div>

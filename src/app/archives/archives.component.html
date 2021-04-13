@@ -1,21 +1,29 @@
-<div class="containerNav">
-  <app-navbar></app-navbar>
-</div>
 
-<div class="container">
-  <div class="row mt-3">
-    <div class="card-group">
-      <div class="col-md-3 m-auto pb-5" *ngFor="let archive of archivedata; let ind=index">
-        <div class="card  shadow" style="width: 18rem;">
-          <div class="card-body ">
-            <h4 class="card-title text-center text-secondary">{{archive.title}}</h4>
-            <p class="card-text text-center ">{{archive.description}}</p>
-          </div>
-          <div class="icons p-3 text-center">
-              <a type="submit" class="mt-2 bi bi-arrow-up-square-fill fs-5 text-secondary" title="UnArchive" (click)="undo(archive,ind)"></a>
+<div class="containerNav" style="z-index: 2;">
+    <app-navbar></app-navbar>
+  </div>
+  
+  <div class="container mt-5" style="z-index: 1;">
+    <h3 *ngIf="archiveHeading==true" class="text-primary text-center display-4 tracking-in-contract">Archive Notes appear here</h3>
+    <div class="row mt-3">
+      <div class="card-group">
+        <div class="col-md-3 m-auto pb-5" *ngFor="let archive of archivedata; let ind=index">
+          <div class="card  shadow" style="width: 18rem;">
+            <div class="card-body ">
+              <h4 class="card-title text-center  fs-3" style="font-family: 'Courgette', cursive;">{{archive.title}}</h4>
+              <p class="card-text text-center fs-5" style="font-family: 'Courgette', cursive;">{{archive.description}}</p>
+            </div>
+            <div *ngFor="let check of archive.checkList; let ind=index" class="px-3 fs-5"  style="font-family: 'Courgette', cursive;">
+              <input type="checkbox"> {{check}}
+            </div>
+            <div class="icons p-3 text-center">
+                <a type="submit" class="mt-2 bi bi-arrow-up-square-fill fs-5 text-secondary" title="UnArchive" (click)="undo(archive,ind)"></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div *ngIf="emptyArchives==true">
+      <p class="display-5 text-center text-secondary mt-5 p-5">Your Archives is empty</p>
+    </div>
   </div>
-</div>

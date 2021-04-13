@@ -2,13 +2,15 @@
   <div class="row">
     <div class=" col-lg-4 col-md-6 col-sm-8 col-12 m-auto">
       <!---------------------------------------------Heading  --------------------------------------------------------->
-      <h3 class="rainbow-text  text-center mt-5 mb-5 display-1" style=" font-weight: 500;">Keep Notes</h3>
+      <div class="text-center mt-5"><img src="/assets/signinlogo.png"></div>
+      <h3 class="rainbow-text  text-center display-1 mb-5 " style=" font-weight: 500;">Keep Notes</h3>
 
       <!------------------------------------------------form------------------------------------------------------------>
       <div class="border-primary shadow m-auto p-auto bounce-in-top">
-         <form [formGroup]="signIn" (ngSubmit)="onSubmit()" class="p-5">
-           <!------------------------------------------------email-------------------------------------------------------->
-                 <div class="form-floating mb-3">
+        <form [formGroup]="signIn" (ngSubmit)="onSubmit()" class="p-5">
+
+          <!------------------------------------------------email-------------------------------------------------------->
+          <div class="form-floating mb-3">
             <input type="email" class="form-control border border-dark" id="email" placeholder="Email" formControlName="email">
             <label for="email"><span class="bi bi-envelope-fill mx-2"></span>Email address</label>
           </div>
@@ -30,7 +32,8 @@
           <div class=" text-center">
             <button class="btn mt-3 px-4">Sign in</button>
           </div>
-         </form>
+        </form>
+
       </div>
 
          <!--------------------------------------------------sign up button------------------------------------------------------>
@@ -44,4 +47,6 @@
   </div>
 </div>
 
-<router-outlet> </router-outlet>
+
+<router-outlet>
+</router-outlet>

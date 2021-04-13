@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { UserserviceService } from '../userservice.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -31,7 +31,7 @@ export class SigninComponent implements OnInit {
     this.submitted = true;
     if (this.signIn.valid) {
       this.us.userLogincheck(this.signIn.value).subscribe(res => {
-        if (res["message"] =="login success") {
+        if (res["message"] == "login success") {
           this.TS.success('Login Success')
           //save token in browser memory
           localStorage.setItem("token", res["token"])

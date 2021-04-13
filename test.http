@@ -1,231 +1,128 @@
-GET http://localhost:7000/user/getusers
+###
+GET http://localhost:5000/user/getusers
 
 ###
-POST http://localhost:7000/user/createuser
-Content-Type:application/json
-
-{
-    "firstName":"Tejaswini",
-    "lastName":"Kothuru",
-    "gender":"female",
-    "dateOfBirth":"01/04/1999",
-    "email":"tejaswinikothuru@gmail.com",
-    "password":"Tejaswini@1"
-}
-
-###
-PUT http://localhost:4000/notes/updatednote
+POST http://localhost:5000/user/createuser
 Content-Type: application/json
 
 {
-    "title":"KeepNotes",
-    "description":"welcome to keep notes. Team-6 Teju swathi khairun nischala"
+     "firstName":"Khairun",
+         "lastName":"Pinjari",
+         "gender":"female",
+         "dateOfBirth":"1-1-1",
+         "email":"pkhairunn@gmail.com",
+         "password":"khairun"
 }
 
 ###
-POST  http://localhost:7000/user/login
+POST http://localhost:5000/user/login
 Content-Type: application/json
 
 {
-    "email":"tejaswinikothuru@gmail.com",
-    "password":"Tejaswini@1"
+     "email":"pkhairunn@gmail.com",
+         "password":"khairun"
+}
+###
+POST http://localhost:5000/notes/createnotes
+Content-Type: application/json
+
+{     "email":"swathi@gmail.com",
+     "title":"i",
+         "description":"abc"
 }
 
 ###
-GET http://localhost:4000/notes/getnotes
+GET http://localhost:5000/notes/getnotes/swathi@gmail.com
 
 ###
-POST http://localhost:4000/notes/createnotes
+POST http://localhost:5000/notes/movetotrash
 Content-Type: application/json
 
 {
-    "title":"KeepNotes",
-    "description":" Welcome To KeepNotes",
-    "status":"true",
-    "archive":"true"
+     "title":"b",
+     "email":"khairun@gmail.com"
 }
 
 ###
-POST http://localhost:5000/notes/deletenote
-Content-Type: application/json
-
-{
-    "title":"KeepNotes",
-    "description":" Welcome To KeepNotes"
-}
-
-###
-GET http://localhost:5000/notes/getdeletednotes
+GET http://localhost:5000/notes/gettrashnotes/khairun@gmail.com
 
 ###
 POST http://localhost:5000/notes/restorenote
 Content-Type: application/json
 
 {
-    "title":"KeepNotes"
+    "title":"a",
+    "email":"khairun@gmail.com"
 }
-
 ###
 POST http://localhost:5000/notes/archivenote
 Content-Type: application/json
 
 {
-    "title":"KeepNotes"
+    "title":"c",
+    "email":"khairun@gmail.com"
 }
 
 ###
-POST http://localhost:5000/notes/undo
-
-{
-    "title":"KeepNotes"
-}
+GET http://localhost:5000/notes/getarchivednotes/khairun@gmail.com
 
 ###
-GET http://localhost:5000/notes/getarchivednotes
-
-###
-GET http://localhost:7000/reminder/getreminder
-
-###
-POST http://localhost:7000/reminder/createreminder
+POST http://localhost:5000/notes/unarchive
 Content-Type: application/json
 
 {
-    "title":"KeepNotes",
-    "description":" Welcome To KeepNotes"
+     "title":"c",
+    "email":"khairun@gmail.com"
 }
 
 ###
-DELETE http://localhost:5000/reminder/removereminder/KeepNotes
+DELETE http://localhost:5000/notes/permanentdelete/swathi@gmail.com/i
 
-###
-GET http://localhost:5000/favourite/getfavourite
 
 ###
 POST http://localhost:5000/favourite/createfavourite
 Content-Type: application/json
 
-{
-    "title":"KeepNotes",
-    "description":" Welcome To KeepNotes"
+{    
+    "email":"swathi@gmail.com",
+     "title":"bb",
+         "description":"aaa",
+         "checkList":["a","b"]
 }
 
 ###
-DELETE http://localhost:5000/favourite/removefavourite/KeepNotes
+GET http://localhost:5000/favourite/getfavourites/khairun@gmail.com
 
 ###
-GET http://localhost:4000/user/getusers
- 
-###
-POST http://localhost:4000/user/createuser
+DELETE http://localhost:5000/favourite/removefavourite/khairun@gmail.com/bb
 Content-Type: application/json
 
 {
-    "firstName":"Tejaswini",
-    "lastName":"Kothuru",
-    "gender":"female",
-    "dateOfBirth":"01/04/1999",
-    "email":"tejaswinikothuru@gmail.com",
-    "password":"Tejaswini@1"
+   "title":"bb",
+         "description":"aaa"
 }
 
+###
+GET http://localhost:5000/reminder/getreminders/swathi@gmail.com
 
 ###
-POST http://localhost:4000/user/login
+POST http://localhost:5000/reminder/createreminder
 Content-Type: application/json
 
 {
-    "email":"tejaswinikothuru@gmail.com",
-    "password":"Tejaswini@1"
+    "email":"swathi@gmail.com",
+     "title":"bb",
+         "description":"aaa"
 }
 
 ###
-POST http://localhost:4000/notes/createnotes
-Content-Type: application/json
+DELETE http://localhost:5000/reminder/deletereminder/khairun@gmail.com/bb
+
+
+###
+POST  http://localhost:5000/notes/updatenote
 
 {
-    "title":"title",
-    "description":"abc",  
-    "status":"true",
-    "archive":"true"
+     "title":"a",
+         "description":"aaaff"
 }
-
-###
-DELETE http://localhost:4000/notes/permanentdelete/title
-###
-GET http://localhost:4000/notes/getnotes
- 
-###
-POST http://localhost:6000/notes/deletenote
-Content-Type:application/json
-
-{
-    "title":"title",
-    "description":"abc"
-}
- 
-###
-GET http://localhost:6000/notes/getarchivednotes
- 
-###
-POST http://localhost:6000/notes/undo
-Content-Type:application/json
-
-{
-    "title":"title",
-    "description":"abc"
-}
-
-
-###
-POST http://localhost:5000/favourite/createfavourite
-Content-Type:application/json
- 
-{​​​​​​​​
-"title":"a",
-"description":"aaa"
-}​​​​​​​​
- 
-###
-GET http://localhost:5000/favourite/getfavourites
- 
-###
-DELETE http://localhost:5000/favourite/removefavourite/a
-Content-Type:application/json
- 
-{​​​​​​​​
-"title":"a",
-"description":"aaa"
-}​​​​​​​​
- 
-
-###
-GET http://localhost:4000/reminder/getreminder
-
-###
-POST http://localhost:4000/reminder/createreminder
-Content-Type: application/json
-
-{
-    "title":"KeepNotes",
-    "description":" Welcome To KeepNotes"
-}
-
-###
-DELETE http://localhost:4000/reminder/removereminder/KeepNotes
-
-
-###
-GET http://localhost:4000/favourite/getfavourite
-
-###
-POST http://localhost:4000/favourite/createfavourite
-Content-Type: application/json
-
-{
-    "title":"KeepNotes",
-    "description":" Welcome To KeepNotes"
-}
-
-###
-DELETE http://localhost:4000/favourite/removefavourite/KeepNotes

@@ -3,7 +3,8 @@ import {FormGroup,FormControl,Validators} from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserserviceService } from '../userservice.service'; 
+import { UserserviceService } from '../userservice.service';
+
 
 @Component({
   selector: 'app-signup',
@@ -36,12 +37,9 @@ export class SignupComponent implements OnInit {
   submit(){
     this.submitted=true;
    if(this.signup.valid){
-     
     this.us.createuser(this.signup.value).subscribe(res=>{
-       console.log(res["message"])
       //if user registers  navigate to signin page
       if(res["message"]=="usercreated"){
-
         this.router.navigateByUrl("/signin")
         this.TS.success('Registration Sucessfull','Success')
       }

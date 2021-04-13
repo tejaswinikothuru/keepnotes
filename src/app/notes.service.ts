@@ -8,21 +8,21 @@ import { Observable } from 'rxjs';
 export class NotesService {
 
   constructor(private hc:HttpClient) { }
-   
- note:any;
+
   createnotes(notesobj):Observable<any>{
     return this.hc.post("/notes/createnotes",notesobj)
    }
 
-   getnotes():Observable<any>{
-    return this.hc.get("/notes/getnotes")
+   getnotes(email):Observable<any>{
+    return this.hc.get(`/notes/getnotes/${email}`)
    }
 
-   createDeleteNotes(delobj):Observable<any>{
-    return this.hc.post("/notes/deletenote",delobj)
+   createTrashNotes(delobj):Observable<any>{
+    return this.hc.post("/notes/movetotrash",delobj)
    }
-   getDeletedNotes():Observable<any>{
-    return this.hc.get("/notes/getdeletednotes")
+
+   getTrashNotes(email):Observable<any>{
+    return this.hc.get(`/notes/gettrashnotes/${email}`)
    }
 
    restoreNotes(restoreObj):Observable<any>{
@@ -32,29 +32,23 @@ export class NotesService {
    createArchiveNotes(archObj):Observable<any>{
     return this.hc.post("/notes/archivenote",archObj)
   }
-  getArchiveNotes():Observable<any>{
-    return this.hc.get("/notes/getarchivednotes")
+  getArchiveNotes(email):Observable<any>{
+    return this.hc.get(`/notes/getarchivednotes/${email}`)
   }
   undoArchivedNotes(undoObj):Observable<any>{
-    return this.hc.post("/notes/undo",undoObj)
-  }
-  permanentDelete(delObj):Observable<any>{
-    console.log("in service",delObj)
-    return this.hc.delete(`/notes/permanentdelete/${delObj.title}`)
-  }
-  
-  editNotesObj(notesdata){
-    console.log(this.note)
-    return this.note=notesdata;
-  }
-  sendNote(){
-    console.log(this.note)
-    return this.note;
+    return this.hc.post("/notes/unarchive",undoObj)
   }
 
-  UpdateNote(note:any):Observable<any>{
-    console.log("Updated notes in service",note)
-    return this.hc.put("/notes/updatednote",note)
+  permanentDelete(delObj):Observable<any>{
+    return this.hc.delete(`/notes/permanentdelete/${delObj.email}/${delObj.title}`)
+  }
+
+  removecheck(checobj):Observable<any>{
+    return this.hc.put(`/notes/removecheck/${localStorage.getItem("email")}`,checobj)
+  }
+
+  uncheck(checobj):Observable<any>{
+    console.log("in service",checobj)
+    return this.hc.put(`/notes/removechecked/${localStorage.getItem("email")}`,checobj)
   }
 }
-

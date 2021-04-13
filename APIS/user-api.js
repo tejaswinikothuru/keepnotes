@@ -3,11 +3,11 @@ const exp=require("express");
 const userApiObj=exp.Router();
 
 //import express-async-handler
-const errorHandler =require("express-async-handler")
+const errorHandler=require("express-async-handler");
+
 //import bycryptsjs
 const bcrypt=require("bcryptjs");
 
-const validateToken=require("../middlewares/validateToken")
 //body parsing
 userApiObj.use(exp.json())
 
@@ -18,13 +18,13 @@ const User = require("../models/User");
 const jwt=require("jsonwebtoken")
 
 //http://localhost:5000/user/getusers
-userApiObj.get("/getusers",validateToken, errorHandler(async(req,res)=>{ 
+userApiObj.get("/getusers",errorHandler(async(req,res)=>{ 
     let userArray=await User.find()
     res.send({message:userArray})
 }))
 
 //http://localhost:5000/user/createuser
-userApiObj.post("/createuser",validateToken,errorHandler(async(req,res)=>{
+userApiObj.post("/createuser",errorHandler(async(req,res)=>{
 
     // hashing password
     let hashedpw=await bcrypt.hash(req.body.password,7)
@@ -74,14 +74,15 @@ userApiObj.post("/login",errorHandler(async(req,res)=>{
        else{
            //if passwords are matched
            //create a json token and sign it
-            let signedtoken=await jwt.sign({firstName:userfromdb.firstName,email:userfromdb.email},process.env.SECRET,{expiresIn:10000})
+            let signedtoken=await jwt.sign({firstName:userfromdb.firstName,email:userfromdb.email},process.env.SECRET,{expiresIn:100000})
         
             //send signedtoken to client
                  res.send({message:"login success",token:signedtoken,firstName:userfromdb.firstName,email:userfromdb.email})
        }
- 
+
     }
 }))
- 
+
+
 //export userApiObj
 module.exports=userApiObj;

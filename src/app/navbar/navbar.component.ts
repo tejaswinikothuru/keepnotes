@@ -35,21 +35,18 @@ export class NavbarComponent implements OnInit {
   }
 
   archive(){
-    this.router.navigateByUrl("/archives")
+    this.router.navigateByUrl("/archive")
   }
 
   trash(){
     this.router.navigateByUrl("/trash")
   }
-  /*help(){
-    this.router.navigateByUrl("/help")
-  }*/
 
   signOut(){
    localStorage.clear();
     //navigate to signin
     this.router.navigateByUrl("/signin")
- 
+  
   }
- 
+  
 }

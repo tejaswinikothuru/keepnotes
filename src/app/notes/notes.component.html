@@ -1,25 +1,44 @@
-<div class="containerNav">
+
+<div class="containerNav" style="z-index: 2;">
   <app-navbar></app-navbar>
 </div>
 
-<div class="container">
-  <h3 class="text-primary" style="margin-left: 350px; margin-right:350px; padding:20px"><marquee> All your Notes are here </marquee></h3>
-  <div class="row mt-3">
-    <div class="card-group">
-      <div class="col-md-3 m-auto pb-5" *ngFor="let note of notesdata; let ind=index">
-        <div class="card  shadow" style="width: 18rem;">
-          <div class="card-body">
-            <h4 class="card-title text-center text-secondary">{{note.title}}</h4>
-            <p class="card-text text-center ">{{note.description}}</p>
-          </div>
-          <div class="icons p-3 d-flex justify-content-between">
-            <a class=" mt-2 bi bi-alarm-fill fs-5 text-warning" title="Reminder" (click)="remindNote(note)"></a>
-            <a class=" mt-2 bi bi-suit-heart-fill fs-5 text-danger" title="Favourites" (click)="favouriteNote(note)"></a>
-            <a class="mt-2 bi bi-arrow-down-square-fill fs-5 text-secondary" title="Archive" (click)="archiveNote(note,ind)"></a>
-            <a class="  mt-2 bi bi-trash-fill fs-5 text-primary" title="Trash" (click)="trashNote(note,ind)"></a>
+
+  <div class="container mt-5" style="z-index: 1;">
+  
+    <h3 *ngIf="notesheading==true" class="text-primary text-center display-4 tracking-in-contract">All your Notes are here</h3>
+    <div class="row mt-3">
+      <div class="card-group" >
+        <div class="col-lg-3 col-md-4 col-sm-6 m-auto pb-5" *ngFor="let note of notesdata; let ind=index">
+          <div class="card shadow" style="width: 18rem;" cdkDrag>
+            <div class="card-body">
+              <h4 class="card-title text-center  fs-3" style="font-family: 'Courgette', cursive;">{{note.title}}</h4>
+              <p class="card-text text-center fs-5 " style="font-family: 'Courgette', cursive;">{{note.description}}</p>
+              <div *ngFor="let check of note.checkList; let ind=index" class="px-3  fs-5" style="font-family: 'Courgette', cursive;">
+               <input type="checkbox" name="check" ngModel value="check"  (click)="checked(check,note.title)"> {{check}}
+              </div>
+               
+             <div *ngIf="note.checkedList.length">
+              <hr>
+              <h5 style="font-family: 'Courgette', cursive;">Checked list</h5>
+              <div *ngFor="let checked of note.checkedList; let ind=index"  class="px-3  fs-5" style="font-family: 'Courgette', cursive;">
+                <input type="checkbox" name="checked" ngModel value="checked"  (click)="uncheck(checked,note.title)" ><del> {{checked}}</del>
+               </div>
+             </div>
+
+            </div>
+            <div class="icons p-3 d-flex justify-content-between">
+              <a class=" mt-2 bi bi-alarm-fill fs-5 " title="Reminder"  style="color:rgb(240, 135, 44)" (click)="remindNote(note)"></a>
+              <a class=" mt-2 bi bi-suit-heart-fill fs-5 text-danger" title="Favourites" (click)="favouriteNote(note)"></a>
+              <a class="mt-2 bi bi-arrow-down-square-fill fs-5 text-secondary" title="Archive" (click)="archiveNote(note,ind)"></a>
+              <a class="  mt-2 bi bi-trash-fill fs-5 text-primary" title="Trash" (click)="trashNote(note,ind)"></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div *ngIf="emptynotes==true">
+      <p class="display-5 text-center text-secondary mt-5 p-5">Your notes is empty</p>
+    </div>
   </div>
-</div>
+  

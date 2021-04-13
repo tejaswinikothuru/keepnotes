@@ -12,12 +12,21 @@ export class FavouriteService {
     return this.hc.post("/favourite/createfavourite",favouriteobj)
    }
 
-   getfavourites():Observable<any>{
-    return this.hc.get("/favourite/getfavourites")
+   getfavourites(email):Observable<any>{
+    return this.hc.get(`/favourite/getfavourites/${email}`)
    }
 
    deleteFavourite(delobj):Observable<any>{
-     console.log(delobj.title)
-    return this.hc.delete(`/favourite/removefavourite/${delobj.title}`)
+    return this.hc.delete(`/favourite/removefavourite/${delobj.email}/${delobj.title}`)
    }
+
+   removecheck(checobj):Observable<any>{
+    console.log(localStorage.getItem("email"),checobj)
+    return this.hc.put(`/favourite/removecheck/${localStorage.getItem("email")}`,checobj)
+  }
+
+  uncheck(checobj):Observable<any>{
+    console.log(localStorage.getItem("email"),checobj)
+    return this.hc.put(`/favourite/removecheck/${localStorage.getItem("email")}`,checobj)
+  }
 }

@@ -12,9 +12,13 @@ export class UserserviceService {
   //creating user
   createuser(userobj):Observable<any>{
     return this.hc.post("/user/createuser",userobj)
-  }
+   }
+
    //cheecking user login
   userLogincheck(usercredobj):Observable<any>{
     return this.hc.post("/user/login",usercredobj)
   }
+  
+
+  
 }

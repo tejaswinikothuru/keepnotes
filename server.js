@@ -5,6 +5,8 @@ const app=exp();
 //import path module
 const path=require("path");
  
+const port=process.env.PORT||5000
+
 //merge server with dist
 app.use(exp.static(path.join(__dirname,'dist/keepnotes')))
  
@@ -44,7 +46,7 @@ app.use((err,req,res,next)=>{
 })
  
 //assigning port
-port=process.env.PORT
+//port=process.env.PORT
 app.listen(port,()=>{
     console.log("server started at"+ port)
 })
