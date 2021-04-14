@@ -39,7 +39,7 @@ import { AuthorizationService } from './authorization.service';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-   // DragDropModule,
+    //DragDropModule,
     ToastrModule.forRoot({
       timeOut:2000,
       progressBar:true,
