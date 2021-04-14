@@ -5,7 +5,7 @@ const app=exp();
 //import path module
 const path=require("path");
  
-const port=process.env.PORT||5000
+const port=process.env.PORT || 5000
 
 //merge server with dist
 app.use(exp.static(path.join(__dirname,'dist/keepnotes')))
