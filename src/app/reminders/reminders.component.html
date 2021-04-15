@@ -2,32 +2,38 @@
     <app-navbar></app-navbar>
   </div>
   
+  <span class="name  fs-5 text-end  d-md-none d-block ">Welcome, {{username}}</span>
+
   <div class="container mt-5" style="z-index: 1;">
     <h3 *ngIf="reminderHeading==true" class="text-primary text-center display-4 tracking-in-contract">Reminders appear here</h3>
     <div class="row mt-3">
       <div class="card-group">
-        <div class="col-md-3 m-auto pb-5" *ngFor="let reminder of reminderData; let ind=index">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12 m-auto pb-5" *ngFor="let reminder of reminderData; let ind=index">
           <div class="card  shadow" style="width: 18rem;">
             <div class="card-body ">
               <h4 class="card-title text-center" style="font-family: 'Courgette', cursive;">{{reminder.title}}</h4>
               <p class="card-text text-center fs-5" style="font-family: 'Courgette', cursive;">{{reminder.description}}</p>
               <div *ngFor="let check of reminder.checkList; let ind=index" class="px-3 fs-5"  style="font-family: 'Courgette', cursive;">
-                <input type="checkbox" name="check" ngModel value="check" (click)="checked(check,reminder.title)"> {{check}}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"  id="checkbox" name="check" ngModel value="check" (click)="removeCheckList(check,reminder.title)">
+                  <label class="form-check-label" for="checkbox">{{check}}</label>
+                </div>
                </div>
 
                <div *ngIf="reminder.checkedList.length">
                 <hr>
                 <h5 style="font-family: 'Courgette', cursive;">Checked list</h5>
                 <div *ngFor="let checked of reminder.checkedList; let ind=index"  class="px-3  fs-5" style="font-family: 'Courgette', cursive;">
-                  <input type="checkbox" name="checked" ngModel value="checked"  (click)="uncheck(checked,reminder.title)" ><del> {{checked}}</del>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox"  id="checked"  name="checked" ngModel value="checked"  (click)="removeCheckedList(checked,reminder.title)" checked>
+                    <label class="form-check-label" for="checked"><del> {{checked}}</del></label>
+                  </div>
                  </div>
                </div>
             </div>
             <div class="icons p-3 text-center">
               <a type="submit" class="mt-2 bi bi-alarm fs-5 " title="Remove from reminder" style="color:rgb(240, 135, 44)" (click)="unremNote(reminder,ind)"></a>
             </div>
-
-           
   
           </div>
   

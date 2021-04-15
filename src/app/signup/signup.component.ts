@@ -44,6 +44,7 @@ export class SignupComponent implements OnInit {
         this.TS.success('Registration Sucessfull','Success')
       }
       else{
+        //if user already exists
         alert("User already exists")
       }
     },err=>{

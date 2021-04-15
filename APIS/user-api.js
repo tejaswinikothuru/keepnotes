@@ -74,7 +74,7 @@ userApiObj.post("/login",errorHandler(async(req,res)=>{
        else{
            //if passwords are matched
            //create a json token and sign it
-            let signedtoken=await jwt.sign({firstName:userfromdb.firstName,email:userfromdb.email},process.env.SECRET,{expiresIn:100000})
+            let signedtoken=await jwt.sign({firstName:userfromdb.firstName,email:userfromdb.email},process.env.SECRET,{expiresIn:10000})
         
             //send signedtoken to client
                  res.send({message:"login success",token:signedtoken,firstName:userfromdb.firstName,email:userfromdb.email})

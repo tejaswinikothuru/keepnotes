@@ -1,37 +1,49 @@
+<!---------------------------navbar----------------->
 <div class="containerNav" style="z-index: 2;">
   <app-navbar></app-navbar>
 </div>
 
+<span class="name  fs-5 text-end  d-md-none d-block ">Welcome, {{username}}</span>
+
 <div class="container mt-5" style="z-index: 1;">
+  <!-----------------------------heading------------------------->
   <h3 *ngIf="favouriteHeading==true" class="text-primary text-center display-4 tracking-in-contract">Favourite Notes appear here</h3>
   <div class="row mt-3">
+    <!----------------------------card--------------------------------->
     <div class="card-group">
-      <div class="col-md-3 m-auto pb-5" *ngFor="let favourite of favouritesData; let ind=index">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-12  m-auto pb-5" *ngFor="let favourite of favouritesData; let ind=index">
         <div class="card  shadow" style="width: 18rem;">
           <div class="card-body ">
             <h4 class="card-title text-center" style="font-family: 'Courgette', cursive;">{{favourite.title}}</h4>
             <p class="card-text text-center fs-5" style="font-family: 'Courgette', cursive;">{{favourite.description}}</p>
+            <!--------------------------checklist--------------------------->
             <div *ngFor="let check of favourite.checkList; let ind=index" class="px-3 fs-5"  style="font-family: 'Courgette', cursive;">
-              <input type="checkbox" name="check" ngModel value="check" (click)="checked(check,favourite.title)"> {{check}}
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox"  id="checkbox" name="check" ngModel value="check" (click)="removeCheckList(check,favourite.title)">
+                <label class="form-check-label" for="checkbox">{{check}}</label>
+              </div>
             </div>
             
+            <!--------------------------------checkedlist----------------------->
             <div *ngIf="favourite.checkedList.length">
               <hr>
               <h5 style="font-family: 'Courgette', cursive;">Checked list</h5>
               <div *ngFor="let checked of favourite.checkedList; let ind=index"  class="px-3  fs-5" style="font-family: 'Courgette', cursive;">
-                <input type="checkbox" name="checked" ngModel value="checked"  (click)="uncheck(checked,favourite.title)" ><del> {{checked}}</del>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"  id="checked"  name="checked" ngModel value="checked"  (click)="removeCheckedList(checked,favourite.title)" checked>
+                  <label class="form-check-label" for="checked"><del> {{checked}}</del></label>
+                </div>
                </div>
              </div>
-
+            <!--------------------unfav icon---------------->
           </div>
           <div class="icons p-3 text-center">
             <a class=" mt-2 bi bi-suit-heart fs-5 text-danger" title="Remove from Favourites" (click)="remFavNote(favourite,ind)"></a>
           </div>
-
         </div>
-
       </div>
     </div>
+    <!----------------------------if favourites is empty--------------->
     <div *ngIf="emptyFavourites==true">
       <p class="display-5 text-center text-secondary mt-5 p-5">Your favourites is empty</p>
     </div>

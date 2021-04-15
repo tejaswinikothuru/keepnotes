@@ -21,13 +21,11 @@ export class ReminderService {
     return this.hc.delete(`/reminder/deletereminder/${delObj.email}/${delObj.title}`)
    }
 
-   removecheck(checobj):Observable<any>{
-    console.log(localStorage.getItem("email"),checobj)
+   removeCheckList(checobj):Observable<any>{
     return this.hc.put(`/reminder/removecheck/${localStorage.getItem("email")}`,checobj)
   }
 
-  uncheck(checobj):Observable<any>{
-    console.log(localStorage.getItem("email"),checobj)
-    return this.hc.put(`/favourite/removecheck/${localStorage.getItem("email")}`,checobj)
+  removeCheckedList(checobj):Observable<any>{
+    return this.hc.put(`/reminder/removechecked/${localStorage.getItem("email")}`,checobj)
   }
 }

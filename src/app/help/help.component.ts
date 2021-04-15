@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class HelpComponent implements OnInit {
 
   constructor() { }
-
+username;
   ngOnInit(): void {
+    this.username=localStorage.getItem("firstName")
   }
 
 }

@@ -43,12 +43,21 @@ export class NotesService {
     return this.hc.delete(`/notes/permanentdelete/${delObj.email}/${delObj.title}`)
   }
 
-  removecheck(checobj):Observable<any>{
+  removeCheckList(checobj):Observable<any>{
     return this.hc.put(`/notes/removecheck/${localStorage.getItem("email")}`,checobj)
   }
 
-  uncheck(checobj):Observable<any>{
+  removeCheckedList(checobj):Observable<any>{
     console.log("in service",checobj)
     return this.hc.put(`/notes/removechecked/${localStorage.getItem("email")}`,checobj)
+  }
+
+  removecheckListinArchive(checobj):Observable<any>{
+    return this.hc.put(`/notes/removecheckinarchive/${localStorage.getItem("email")}`,checobj)
+  }
+
+  removecheckedListinArchive(checobj):Observable<any>{
+    console.log("in service",checobj)
+    return this.hc.put(`/notes/removecheckedinarchive/${localStorage.getItem("email")}`,checobj)
   }
 }

@@ -2,19 +2,36 @@
   <app-navbar></app-navbar>
 </div>
 
+<span class="name  fs-5 text-end  d-md-none d-block ">Welcome, {{username}}</span>
+
 <div class="container mt-5" style="z-index: 1;">
   <h3 *ngIf="trashHeading==true" class="text-primary text-center display-4 tracking-in-contract">Trash Notes appear here</h3>
   <div class="row mt-3">
     <div class="card-group">
-      <div class="col-md-3 m-auto pb-5" *ngFor="let trash of trashData; let ind=index">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-12 m-auto pb-5" *ngFor="let trash of trashData; let ind=index">
         <div class="card  shadow" style="width: 18rem;">
           <div class="card-body ">
             <h4 class="card-title text-center" style="font-family: 'Courgette', cursive;">{{trash.title}}</h4>
             <p class="card-text text-center fs-5" style="font-family: 'Courgette', cursive;">{{trash.description}}</p>
             <div *ngFor="let check of trash.checkList; let ind=index" class="px-3 fs-5" style="font-family: 'Courgette', cursive;">
-              <input type="checkbox" > {{check}}
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox"  id="checkbox">
+                <label class="form-check-label" for="checkbox">{{check}}</label>
+              </div>
             </div>
           </div>
+
+          <div *ngIf="trash.checkedList.length">
+            <hr>
+            <h5 style="font-family: 'Courgette', cursive;">Checked list</h5>
+            <div *ngFor="let checked of trash.checkedList; let ind=index"  class="px-3  fs-5 " style="font-family: 'Courgette', cursive;">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox"  id="checked">
+                <label class="form-check-label" for="checked"><del> {{checked}}</del></label>
+              </div>
+             </div>
+           </div>
+
           <div class="icons p-3 text-center d-flex justify-content-around">
             <button type="button" class=" btn btn-primary mt-2 " title="Restore" (click)="restoreNote(trash)">Restore</button>
             <button type="button" class=" btn btn-danger mt-2 " title="Permanent delete" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>

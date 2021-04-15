@@ -17,11 +17,11 @@ notesheading=false;
 emptynotes=false
 notesdata=[];
 checkArray=[]
-
+username
 
 
   ngOnInit(): void {
-
+    this.username=localStorage.getItem("firstName")
     let email=localStorage.getItem("email")
     this.ns.getnotes(email).subscribe(res=>{
       
@@ -34,7 +34,6 @@ checkArray=[]
       //if token exists
       else{
         this.notesdata=res["message"]
-         console.log(this.notesdata)
         if(this.notesdata.length==0){
           this.emptynotes=true;
          }
@@ -155,27 +154,25 @@ checkArray=[]
     })
   }
   
-  checked(checkobj,title){
-    
+  removeCheckList(checkobj,title){
     let checkbox={title:title,checkobj:checkobj}
-    this.ns.removecheck(checkbox).subscribe(res=>{
+    this.ns.removeCheckList(checkbox).subscribe(res=>{
        this.notesdata=res["message"]
     },err=>{})
 
-    this.fs.removecheck(checkbox).subscribe(res=>{})
-    this.rs.removecheck(checkbox).subscribe(res=>{})
+    this.fs.removeCheckList(checkbox).subscribe(res=>{})
+    this.rs.removeCheckList(checkbox).subscribe(res=>{})
   
   }
 
-  uncheck(checkedobj,title){
-    console.log(checkedobj,title)
+  removeCheckedList(checkedobj,title){
     let checkedbox={title:title,checkedobj:checkedobj}
-    this.ns.uncheck(checkedbox).subscribe(res=>{
+    this.ns.removeCheckedList(checkedbox).subscribe(res=>{
       this.notesdata=res["message"]
     },err=>{})
 
-    this.fs.uncheck(checkedbox).subscribe(res=>{})
-    this.rs.uncheck(checkedbox).subscribe(res=>{})
+    this.fs.removeCheckedList(checkedbox).subscribe(res=>{})
+    this.rs.removeCheckedList(checkedbox).subscribe(res=>{})
   
   }
   

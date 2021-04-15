@@ -20,13 +20,11 @@ export class FavouriteService {
     return this.hc.delete(`/favourite/removefavourite/${delobj.email}/${delobj.title}`)
    }
 
-   removecheck(checobj):Observable<any>{
-    console.log(localStorage.getItem("email"),checobj)
+   removeCheckList(checobj):Observable<any>{
     return this.hc.put(`/favourite/removecheck/${localStorage.getItem("email")}`,checobj)
   }
 
-  uncheck(checobj):Observable<any>{
-    console.log(localStorage.getItem("email"),checobj)
-    return this.hc.put(`/favourite/removecheck/${localStorage.getItem("email")}`,checobj)
+  removeCheckedList(checobj):Observable<any>{
+    return this.hc.put(`/favourite/removechecked/${localStorage.getItem("email")}`,checobj)
   }
 }

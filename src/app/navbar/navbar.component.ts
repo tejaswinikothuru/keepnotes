@@ -42,6 +42,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl("/trash")
   }
 
+  help(){
+    this.router.navigateByUrl("/help")
+  }
+
   signOut(){
    localStorage.clear();
     //navigate to signin

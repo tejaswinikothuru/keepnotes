@@ -50,7 +50,7 @@ export class SigninComponent implements OnInit {
       })
     }
   }
-
+//navigate to signup page
   gotoSignUp() {
     this.router.navigateByUrl("/signup")
 

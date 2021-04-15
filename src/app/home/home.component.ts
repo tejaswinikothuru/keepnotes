@@ -18,13 +18,14 @@ export class HomeComponent implements OnInit {
   visibleNote = false;
   visibleCheck=false;
   visibleList=false;
+  username;
  email;
  values=[];
- checkedList=[]
  
 
 
   ngOnInit(): void {
+    this.username=localStorage.getItem("firstName")
     this.email=localStorage.getItem("email")
   }
 
@@ -44,10 +45,9 @@ export class HomeComponent implements OnInit {
   //method to save note 
   saveNote(noteObj) {
     let note=noteObj.value
-    console.log(noteObj)
+   
     note={email:this.email,title:note.title,description:note.description}
 
-    console.log(note)
     //subscribing
     this.ns.createnotes(note).subscribe(res => {
      if(res["message"]=="failed"){
@@ -157,13 +157,17 @@ export class HomeComponent implements OnInit {
 
 //-----------------------------checkList methods-----------------------------------------------------------------
 
+add(ch){
+  this.values.push(ch.value)
+ }
+delvalue(ind){
+ this.values.splice(ind,1)
+}
    //method to save list
    saveList(noteObj) {
     let note=noteObj.value
-    console.log(noteObj)
-    note={email:this.email,title:note.title,description:"",checkList:this.values,checkedList:this.checkedList}
+    note={email:this.email,title:note.title,description:"",checkList:this.values}
 
-    console.log(note)
     //subscribing
     this.ns.createnotes(note).subscribe(res => {
      if(res["message"]=="failed"){
@@ -171,7 +175,7 @@ export class HomeComponent implements OnInit {
        this.router.navigateByUrl("/signin")
      }
      else{
-        //if note crreated
+        //if note created
       if (res["message"] == "notes created") {
         this.TS.info('CheckList added successfully')
         this.visibleCheck = false;
@@ -194,12 +198,12 @@ export class HomeComponent implements OnInit {
     })
   }
    
-  //method to remind not
+  //method to remind 
   remindList(remObj) {
 
     let rem=remObj.value
 
-    rem={email:this.email,title:rem.title,checkList:this.values,checkedList:this.checkedList}
+    rem={email:this.email,title:rem.title,checkList:this.values}
     //subscribing
    this.rs.createReminder(rem).subscribe(res => {
     //added to favourites
@@ -213,7 +217,7 @@ export class HomeComponent implements OnInit {
       this.visibleCheck = false;
       this.values=[]
     }
-    //if note not added to reminders
+    //if list not added to reminders
     else {
       alert(res["message"])
     }
@@ -224,19 +228,19 @@ export class HomeComponent implements OnInit {
     console.log(err)
   })
 
-  //adding samenote in notes
+  //adding samelist in notes
   this.ns.createnotes(rem).subscribe(res => {
   }, err => {
     console.log(err)
   })
   }
 
-  //method to add notes to favourites
+  //method to add list to favourites
   favouriteList(favObj) {
 
     let fav=favObj.value
 
-    fav={email:this.email,title:fav.title,checkList:this.values,checkedList:this.checkedList}
+    fav={email:this.email,title:fav.title,checkList:this.values}
     //subscribing
     this.fs.createfavourite(fav).subscribe(res => {
      if(res["message"]=="failed"){
@@ -250,7 +254,7 @@ export class HomeComponent implements OnInit {
         this.visibleCheck = false;
         this.values=[]
       }
-      //if note not added to favourites
+      //if list not added to favourites
       else {
         alert(res["message"])
       }
@@ -259,17 +263,11 @@ export class HomeComponent implements OnInit {
       console.log(err)
     })
 
-    //adding samenote in notes
+    //adding samelist in notes
     this.ns.createnotes(fav).subscribe(res => {
     }, err => {
       console.log(err)
     })
   }
-
-
- add(ch){
-  this.values.push(ch.value)
- }
-  
 
 }

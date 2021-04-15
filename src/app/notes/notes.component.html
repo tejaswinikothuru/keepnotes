@@ -1,32 +1,42 @@
-
+<!----------------------------navbar---------------------->
 <div class="containerNav" style="z-index: 2;">
   <app-navbar></app-navbar>
 </div>
 
+<span class="name  fs-5 text-end  d-md-none d-block ">Welcome, {{username}}</span>
 
-  <div class="container mt-5" style="z-index: 1;">
-  
+  <div class="container    mt-5" style="z-index: 1;">
+  <!-------------------------------heading------------------->
     <h3 *ngIf="notesheading==true" class="text-primary text-center display-4 tracking-in-contract">All your Notes are here</h3>
-    <div class="row mt-3">
+    <div class="row  mt-3">
+      <!-------------------------card------------------------------->
       <div class="card-group" >
-        <div class="col-lg-3 col-md-4 col-sm-6 m-auto pb-5" *ngFor="let note of notesdata; let ind=index">
-          <div class="card shadow" style="width: 18rem;" cdkDrag>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12 m-auto pb-5" *ngFor="let note of notesdata; let ind=index">
+          <div class="card  shadow" style="width: 18rem;" cdkDrag>
             <div class="card-body">
               <h4 class="card-title text-center  fs-3" style="font-family: 'Courgette', cursive;">{{note.title}}</h4>
               <p class="card-text text-center fs-5 " style="font-family: 'Courgette', cursive;">{{note.description}}</p>
+              <!-------------------------------checklist---------------------------->
               <div *ngFor="let check of note.checkList; let ind=index" class="px-3  fs-5" style="font-family: 'Courgette', cursive;">
-               <input type="checkbox" name="check" ngModel value="check"  (click)="checked(check,note.title)"> {{check}}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"  id="checkbox" name="check" ngModel value="check" (click)="removeCheckList(check,note.title)">
+                  <label class="form-check-label" for="checkbox">{{check}}</label>
+                </div>
               </div>
-               
+            <!---------------------------------checkedlist-------------------------->   
              <div *ngIf="note.checkedList.length">
               <hr>
               <h5 style="font-family: 'Courgette', cursive;">Checked list</h5>
-              <div *ngFor="let checked of note.checkedList; let ind=index"  class="px-3  fs-5" style="font-family: 'Courgette', cursive;">
-                <input type="checkbox" name="checked" ngModel value="checked"  (click)="uncheck(checked,note.title)" ><del> {{checked}}</del>
+              <div *ngFor="let checked of note.checkedList; let ind=index"  class="px-3  fs-5 " style="font-family: 'Courgette', cursive;">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"  id="checked"  name="checked" ngModel value="checked"  (click)="removeCheckedList(checked,note.title)" checked>
+                  <label class="form-check-label" for="checked"><del> {{checked}}</del></label>
+                </div>
                </div>
              </div>
 
             </div>
+            <!-----------------------------------icons-------------------------------->
             <div class="icons p-3 d-flex justify-content-between">
               <a class=" mt-2 bi bi-alarm-fill fs-5 " title="Reminder"  style="color:rgb(240, 135, 44)" (click)="remindNote(note)"></a>
               <a class=" mt-2 bi bi-suit-heart-fill fs-5 text-danger" title="Favourites" (click)="favouriteNote(note)"></a>
@@ -37,6 +47,7 @@
         </div>
       </div>
     </div>
+    <!------------------------------------if notes are empty------------------------------>
     <div *ngIf="emptynotes==true">
       <p class="display-5 text-center text-secondary mt-5 p-5">Your notes is empty</p>
     </div>

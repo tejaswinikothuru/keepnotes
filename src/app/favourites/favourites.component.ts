@@ -17,14 +17,16 @@ export class FavouritesComponent implements OnInit {
   favouritesData = [];
   favouriteHeading=false;
   emptyFavourites=false;
+  username;
   email;
 
   ngOnInit(): void {
+    this.username=localStorage.getItem("firstName")
 this.email=localStorage.getItem("email")
 
     //subscribing
     this.fs.getfavourites(this.email).subscribe(res => {
-      this.favouritesData = res["message"]
+     
       //if token not exists or session expired
      if(res["message"]=="failed"){
        alert(res["reason"])
@@ -32,7 +34,7 @@ this.email=localStorage.getItem("email")
       }
       //if token exists
      else{
-       
+      this.favouritesData = res["message"]
       if(this.favouritesData.length==0) {  
          this.emptyFavourites=true;
         }
@@ -63,27 +65,26 @@ this.email=localStorage.getItem("email")
     }, err => { console.log(err) })
   }
 
-  checked(checkobj,title){
-    console.log(checkobj,title)
+  //method to remove checklist
+  removeCheckList(checkobj,title){
     let checkbox={title:title,checkobj:checkobj}
-    this.fs.removecheck(checkbox).subscribe(res=>{
+    this.fs.removeCheckList(checkbox).subscribe(res=>{
       this.favouritesData=res["message"]
-      console.log(this.favouritesData)
     },err=>{})
     
-    this.ns.removecheck(checkbox).subscribe(res=>{})
-    this.rs.removecheck(checkbox).subscribe(res=>{})
+    this.ns.removeCheckList(checkbox).subscribe(res=>{})
+    this.rs.removeCheckList(checkbox).subscribe(res=>{})
   }
-  uncheck(checkedobj,title){
-    console.log(checkedobj,title)
+
+  //method to remove checkedlist
+  removeCheckedList(checkedobj,title){
     let checkedbox={title:title,checkedobj:checkedobj}
-    this.fs.uncheck(checkedbox).subscribe(res=>{
+    this.fs.removeCheckedList(checkedbox).subscribe(res=>{
       this.favouritesData=res["message"]
-      console.log(this.favouritesData)
     },err=>{})
 
-    this.ns.uncheck(checkedbox).subscribe(res=>{})
-    this.rs.uncheck(checkedbox).subscribe(res=>{})
+    this.ns.removeCheckedList(checkedbox).subscribe(res=>{})
+    this.rs.removeCheckedList(checkedbox).subscribe(res=>{})
   
   }
 

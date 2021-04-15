@@ -1,24 +1,23 @@
 <div class="navBarContainer">
   <!-------------------------------------------nav bar start ----------------------------------------------------------------->
-  <nav class="navbar navbar-light  justify-content-between">
+  <nav class="navbar navbar-light sticky-top justify-content-between">
 
     <!-------------------------------------------toggler for sidebar--------------------------------------------------->
     <div>
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#target" aria-pressed="false"
-        autocomplete="off">
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#target" aria-pressed="false" autocomplete="off">
         <span class="bi bi-list fs-1 text-light"></span>
       </button>
-      &nbsp;
     </div>
 
     <!------------------------------------------------ Heading --------------------------------------------------------->
-    <div>
-      <h1 class="navbar-brand" class="rainbow-text"><img src="/assets/navbarlogo.png"> Keep Notes</h1>
+    <div class="d-flex inline-block">
+      <img src="/assets/logo1.png"> 
+      <h1 class="navbar-brand fs-1" style="color: rgb(13, 247, 255);"> Keep Notes</h1>
     </div>
    
     <div class="d-flex inline">
       <a routerLink="" (click)="gotoHome()" class="bi bi-house-door-fill text-light fs-3"></a>
-      <p class="name text-light fs-3"><span class="bi bi-person-circle"></span>Welcome, {{username}}</p>
+      <p class="name text-light fs-3 pr-5 bi bi-person-circle  d-md-block d-none">Welcome, {{username}}</p>
     </div>
 
   </nav>
@@ -27,19 +26,16 @@
   <!-------------------------------------------------------sidebar start------------------------------------------------------->
   <aside class="collapse navbar-collapse sidebar" id="target">
      
-      <div class="d-flex justify-content-between">
-       
-    
-     <p class="fs-3"> <img src="/assets/sidebarlogo.png">Keep Notes</p>
+      <div class="pb-5">
+     <span class=" fs-5  bi bi-person text-light">{{email}}</span>
       </div>
-      <p class="text-light">{{email}}</p>
      
-    
     <a routerLink="" (click)="note()"><i class="bi bi-journals"  ></i><span>Notes</span></a>
     <a routerLink="" (click)="reminder()"><i class="bi bi-bell"></i><span>Reminder</span></a>
     <a routerLink="" (click)="favourite()"><i class="bi bi-bookmark-heart-fill"></i><span>Favourites</span></a>
     <a routerLink="" (click)="archive()"><i class="bi bi-file-arrow-down"></i><span>Archive</span></a>
     <a routerLink="" (click)="trash() "><i class="bi bi-trash"></i><span>Trash</span></a>
+    <a routerLink="" (click)="help() "><i class="bi bi-question-circle-fill"></i><span>Help</span></a>
     <a routerLink="" (click)="signOut()"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></a>
     </aside>
 
@@ -49,7 +45,7 @@
 </div>
 <!--header area end-->
 
-
+ 
 
 
 <router-outlet></router-outlet>

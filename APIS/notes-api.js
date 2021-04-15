@@ -6,7 +6,7 @@ const notesApiObj = exp.Router();
 const errorHandler = require("express-async-handler");
 
 //import token
-const validateToken=require("../middlewares/verifyToken")
+const validateToken = require("../middlewares/verifyToken")
 
 //body parsing
 notesApiObj.use(exp.json())
@@ -16,75 +16,68 @@ const Notes = require("../models/Notes");
 
 
 //http://localhost:5000/notes/getnotes/email
-notesApiObj.get("/getnotes/:email",validateToken, errorHandler(async (req, res) => {
+notesApiObj.get("/getnotes/:email", validateToken, errorHandler(async (req, res) => {
     //finding notes with status true 
-    let notesArray = await Notes.find({$and: [{ status: true },{archive:true},{email:req.params.email}]})
+    let notesArray = await Notes.find({ $and: [{ status: true }, { archive: true }, { email: req.params.email }] })
     res.send({ message: notesArray })
 }))
 
 //http://localhost:5000/notes/createnotes
-notesApiObj.post("/createnotes",validateToken,errorHandler(async (req, res) => {
+notesApiObj.post("/createnotes", validateToken, errorHandler(async (req, res) => {
 
-    let titlefrmdb=await Notes.findOne({$and:[{title:req.body.title},{email:req.body.email}]})
+    let titlefrmdb = await Notes.findOne({ $and: [{ title: req.body.title }, { email: req.body.email }] })
 
-  if(titlefrmdb==null){
+    if (titlefrmdb == null) {
         //create notesobj for notesmodel
-    let notesobj = new Notes({
-        email:req.body.email,
-        title: req.body.title,
-        description: req.body.description,
-        status: true,
-        archive:true,
-       checkList:req.body.checkList, 
-       
-
-    })
-    if (notesobj.title =="") {
-        res.send({ message: "Empty title notes cannot be saved" })
+        let notesobj = new Notes({
+            email: req.body.email,
+            title: req.body.title,
+            description: req.body.description,
+            status: true,
+            archive: true,
+            checkList: req.body.checkList,
+        })
+        if (notesobj.title == "") {
+            res.send({ message: "Empty title notes cannot be saved" })
+        }
+        else if (notesobj.description == "" && notesobj.checkList.length == 0) {
+            res.send({ message: "Note content is missing" })
+        }
+        else {
+            //save
+            await notesobj.save()
+            res.send({ message: "notes created" })
+        }
     }
-    else if(notesobj.description=="" && notesobj.checkList.length==0){
-        res.send({ message: "Note content is missing" })
-    }
-   
     else {
-        //save
-        console.log(notesobj)
-        await notesobj.save()
-        res.send({ message: "notes created" })
+        res.send({ message: "title already exists" })
     }
-  }
-  else{
-      res.send({message:"title already exists"})
-  }
-
-
 }))
 
 
 
 //http://localhost:5000/notes/movetotrash
-notesApiObj.post("/movetotrash",validateToken, errorHandler(async (req, res) => {
+notesApiObj.post("/movetotrash", validateToken, errorHandler(async (req, res) => {
     let newNotesObj = req.body;
     //updating status to false
-   
-    let status = await Notes.findOneAndUpdate({ $and: [{ title:newNotesObj.title },{archive:true},{email:newNotesObj.email}], "status": true }, { status: false })
+    let status = await Notes.findOneAndUpdate({ $and: [{ title: newNotesObj.title }, { archive: true }, { email: newNotesObj.email }], "status": true }, { status: false })
     res.send({ message: "soft deleted" })
-
-
 }))
 
-//http://localhost:5000/notes/getdeletednotes
-notesApiObj.get("/gettrashnotes/:email",validateToken, errorHandler(async (req, res) => {
+
+//http://localhost:5000/notes/gettrashnotes
+notesApiObj.get("/gettrashnotes/:email", validateToken, errorHandler(async (req, res) => {
     //finding notes with status false
-    let notesArray = await Notes.find({$and:[{ status: false},{email:req.params.email}] })
+    let notesArray = await Notes.find({ $and: [{ status: false }, { email: req.params.email }] })
     res.send({ message: notesArray })
 }))
 
+
 //http://localhost:5000/notes/restorenote
-notesApiObj.post("/restorenote",errorHandler(async (req, res) => {
+notesApiObj.post("/restorenote", errorHandler(async (req, res) => {
     let newNotesObj = req.body;
     //updating status to true
-    let status = await Notes.findOneAndUpdate({ $and: [{ title: newNotesObj.title },{archive:true},{email:newNotesObj.email}], "status": false }, { status: true })
+    let status = await Notes.findOneAndUpdate({ $and: [{ title: newNotesObj.title }, { archive: true }, { email: newNotesObj.email }], "status": false }, { status: true })
     res.send({ message: "note restored" })
 
 }))
@@ -92,89 +85,122 @@ notesApiObj.post("/restorenote",errorHandler(async (req, res) => {
 
 //Archive
 //http://localhost:5000/notes/archivenote
-notesApiObj.post("/archivenote",validateToken, errorHandler(async (req, res) => {
+notesApiObj.post("/archivenote", validateToken, errorHandler(async (req, res) => {
     let newNotesObj = req.body;
     //updating status to true
-    let status = await Notes.findOneAndUpdate({ $and: [{ title:newNotesObj.title },{status:true},{email:newNotesObj.email}], "archive": true }, { archive: false })
+    let status = await Notes.findOneAndUpdate({ $and: [{ title: newNotesObj.title }, { status: true }, { email: newNotesObj.email }], "archive": true }, { archive: false })
     res.send({ message: "Note Archived" })
 
 }))
 
 //http://localhost:5000/notes/getarchivednotes/email
-notesApiObj.get("/getarchivednotes/:email",validateToken,errorHandler(async (req, res) => {
+notesApiObj.get("/getarchivednotes/:email", validateToken, errorHandler(async (req, res) => {
     //finding notes with status false
-    let notesArray = await Notes.find({$and:[{ archive: false},{email:req.params.email}] })
+    let notesArray = await Notes.find({ $and: [{ archive: false }, { email: req.params.email }] })
     res.send({ message: notesArray })
 }))
 
 
 //http://localhost:5000/notes/unarchive
-notesApiObj.post("/unarchive",validateToken, errorHandler(async (req, res) => {
+notesApiObj.post("/unarchive", validateToken, errorHandler(async (req, res) => {
     let newNotesObj = req.body;
     //updating status to true
-    let status = await Notes.findOneAndUpdate({ $and: [{ title: newNotesObj.title },{status:true},{email:newNotesObj.email}], "archive": false }, { archive: true })
+    let status = await Notes.findOneAndUpdate({ $and: [{ title: newNotesObj.title }, { status: true }, { email: newNotesObj.email }], "archive": false }, { archive: true })
     res.send({ message: "unarchived" })
 
 }))
 
 //http:localhost:5000/notes/permanentdelete
-notesApiObj.delete("/permanentdelete/:email/:title",validateToken,errorHandler(async(req,res)=>{
-      let obj= await Notes.deleteOne({$and:[{email:req.params.email},{title:req.params.title}]})
-       res.send({message:"deleted permanetly"})
+notesApiObj.delete("/permanentdelete/:email/:title", validateToken, errorHandler(async (req, res) => {
+    let obj = await Notes.deleteOne({ $and: [{ email: req.params.email }, { title: req.params.title }] })
+    res.send({ message: "deleted permanetly" })
 }))
 
 //http://localhost:5000/notes/removecheck/email
-  notesApiObj.put("/removecheck/:email",validateToken,errorHandler(async(req,res)=>{
-      let check=await Notes.findOne({$and:[{email:req.params.email},{title:req.body.title}]})
-      let checkList=check.checkList
-      let checkedList=check.checkedList
+notesApiObj.put("/removecheck/:email", validateToken, errorHandler(async (req, res) => {
+    let check = await Notes.findOne({ $and: [{ email: req.params.email }, { title: req.body.title }] })
+    let checkList = check.checkList
+    let checkedList = check.checkedList
 
-      for(let [ind,i] of checkList.entries()){
-        
-          if(i==req.body.checkobj)
-          {  
+    for (let [ind, i] of checkList.entries()) {
+
+        if (i == req.body.checkobj) {
+            //if checkobj matches in checkList array
             checkedList.push(req.body.checkobj)
-            console.log(checkedList)
-               checkList.splice(ind,1)
-             
-              let result=await Notes.updateOne({$and:[{email:req.params.email},{title:req.body.title}]},{checkList:checkList,checkedList:checkedList})
-              let notes=await Notes.find({$and:[{email:req.params.email},{status:true},{archive:true}]}) 
-              res.send({message:notes})
-              break;
-
-             
-          }
-        
-      }
-      
-
-  }))  
-
-  notesApiObj.put("/removechecked/:email",validateToken,errorHandler(async(req,res)=>{
-    let check=await Notes.findOne({$and:[{email:req.params.email},{title:req.body.title}]})
-    let checkedList=check.checkedList
-    let checkList=check.checkList
-   
-    for(let [ind,i] of checkedList.entries()){
-      
-        if(i==req.body.checkedobj)
-        {  
-          checkList.push(req.body.checkedobj)
-          console.log(checkList)
-             checkedList.splice(ind,1)
-           
-            let result=await Notes.updateOne({$and:[{email:req.params.email},{title:req.body.title}]},{checkList:checkList,checkedList:checkedList})
-            let notes=await Notes.find({$and:[{email:req.params.email},{status:true},{archive:true}]}) 
-            res.send({message:notes})
+            checkList.splice(ind, 1)
+            //updating checkList and checkedList
+            let result = await Notes.updateOne({ $and: [{ email: req.params.email }, { title: req.body.title }] }, { checkList: checkList, checkedList: checkedList })
+            let notes = await Notes.find({ $and: [{ email: req.params.email }, { status: true }, { archive: true }] })
+            res.send({ message: notes })
             break;
-
-           
         }
-      
     }
-    
+}))
 
-}))  
+
+//http://localhost:5000/notes/removechecked/email
+notesApiObj.put("/removechecked/:email", validateToken, errorHandler(async (req, res) => {
+    let check = await Notes.findOne({ $and: [{ email: req.params.email }, { title: req.body.title }] })
+    let checkedList = check.checkedList
+    let checkList = check.checkList
+
+    for (let [ind, i] of checkedList.entries()) {
+
+        if (i == req.body.checkedobj) {
+            //if checkobj matches in checkedList array
+            checkList.push(req.body.checkedobj)
+            checkedList.splice(ind, 1)
+            //updating checkList and checkedList
+            let result = await Notes.updateOne({ $and: [{ email: req.params.email }, { title: req.body.title }] }, { checkList: checkList, checkedList: checkedList })
+            let notes = await Notes.find({ $and: [{ email: req.params.email }, { status: true }, { archive: true }] })
+            res.send({ message: notes })
+            break;
+        }
+    }
+}))
+
+//http://localhost:5000/notes/removecheckinarchive/email
+notesApiObj.put("/removecheckinarchive/:email", validateToken, errorHandler(async (req, res) => {
+    let check = await Notes.findOne({ $and: [{ email: req.params.email }, { title: req.body.title }] })
+    let checkList = check.checkList
+    let checkedList = check.checkedList
+
+    for (let [ind, i] of checkList.entries()) {
+
+        if (i == req.body.checkobj) {
+            //if checkobj matches in checkList array
+            checkedList.push(req.body.checkobj)
+            checkList.splice(ind, 1)
+            //updating checkList and checkedList
+            let result = await Notes.updateOne({ $and: [{ email: req.params.email }, { title: req.body.title }] }, { checkList: checkList, checkedList: checkedList })
+            let notes = await Notes.find({ $and: [{ email: req.params.email }, { status: true }, { archive: false }] })
+            res.send({ message: notes })
+            break;
+        }
+    }
+}))
+
+
+//http://localhost:5000/notes/removecheckedinarchive/email
+notesApiObj.put("/removecheckedinarchive/:email", validateToken, errorHandler(async (req, res) => {
+    let check = await Notes.findOne({ $and: [{ email: req.params.email }, { title: req.body.title }] })
+    let checkedList = check.checkedList
+    let checkList = check.checkList
+
+    for (let [ind, i] of checkedList.entries()) {
+
+        if (i == req.body.checkedobj) {
+            //if checkobj matches in checkList array
+            checkList.push(req.body.checkedobj)
+            checkedList.splice(ind, 1)
+            //updating checkList and checkedList
+            let result = await Notes.updateOne({ $and: [{ email: req.params.email }, { title: req.body.title }] }, { checkList: checkList, checkedList: checkedList })
+            let notes = await Notes.find({ $and: [{ email: req.params.email }, { status: true }, { archive: false }] })
+            res.send({ message: notes })
+            break;
+        }
+    }
+}))
 
 //export notesApiObj
 module.exports = notesApiObj;

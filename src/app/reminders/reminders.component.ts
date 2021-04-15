@@ -17,20 +17,21 @@ export class RemindersComponent implements OnInit {
   emptyRemainders=false
   reminderData=[];
   email;
+  username;
 
   ngOnInit(): void {
-
+    this.username=localStorage.getItem("firstName")
     this.email=localStorage.getItem("email")
      //subscribing
      this.rs.getReminder(this.email).subscribe(res => {
        
-      this.reminderData = res["message"]
-      console.log(this.reminderData)
+    
     if(res["message"]=="failed"){
       alert(res["reason"])
       this.router.navigateByUrl("/signin")
     }
     else{
+      this.reminderData = res["message"]
       if(this.reminderData.length==0)
       {
         this.emptyRemainders=true;
@@ -60,27 +61,25 @@ export class RemindersComponent implements OnInit {
   }
    
 
-  checked(checkobj,title){
-    console.log(checkobj,title)
+  removeCheckList(checkobj,title){
     let checkbox={title:title,checkobj:checkobj}
-    this.rs.removecheck(checkbox).subscribe(res=>{
+    this.rs.removeCheckList(checkbox).subscribe(res=>{
       this.reminderData=res["message"]
       console.log(this.reminderData)
     },err=>{})
 
-    this.ns.removecheck(checkbox).subscribe(res=>{})
-    this.fs.removecheck(checkbox).subscribe(res=>{})
+    this.ns.removeCheckList(checkbox).subscribe(res=>{})
+    this.fs.removeCheckList(checkbox).subscribe(res=>{})
   }
 
-  uncheck(checkedobj,title){
-    console.log(checkedobj,title)
+  removeCheckedList(checkedobj,title){
     let checkedbox={title:title,checkedobj:checkedobj}
-    this.rs.uncheck(checkedbox).subscribe(res=>{
+    this.rs.removeCheckedList(checkedbox).subscribe(res=>{
       this.reminderData=res["message"]
     },err=>{})
 
-    this.fs.uncheck(checkedbox).subscribe(res=>{})
-    this.ns.uncheck(checkedbox).subscribe(res=>{})
+    this.fs.removeCheckedList(checkedbox).subscribe(res=>{})
+    this.ns.removeCheckedList(checkedbox).subscribe(res=>{})
   
   }
 }

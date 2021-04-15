@@ -6,6 +6,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 //import {DragDropModule} from '@angular/cdk/drag-drop'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
@@ -18,6 +19,7 @@ import { ArchivesComponent } from './archives/archives.component';
 import { TrashComponent } from './trash/trash.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { AuthorizationService } from './authorization.service';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { AuthorizationService } from './authorization.service';
     RemindersComponent,
     ArchivesComponent,
     TrashComponent,
-    FavouritesComponent
+    FavouritesComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

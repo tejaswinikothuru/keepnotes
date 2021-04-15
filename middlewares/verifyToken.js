@@ -5,13 +5,13 @@ const validateToken=(req,res,next)=>{
     let tokenwithBearer=req.headers['authorization']
 
     if(tokenwithBearer==undefined){
-        res.send({message:"failed", reason:"unauthorized access"})
+        res.send({message:"failed", reason:"Please login"})
     }
     else{
        // get token from bearer token
        let token=tokenwithBearer.slice(7,tokenwithBearer.length)
        //verify token
-       jwt.verify(token,"abcdefghij",(err,decodetoken)=>{
+       jwt.verify(token,"khswteni6",(err,decodetoken)=>{
            if(err){
                res.send({message:"failed",reason:"session expired"})
            }

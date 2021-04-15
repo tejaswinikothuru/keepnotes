@@ -14,8 +14,8 @@
                   <label for="fname">First Name</label>
                 </div>
                 <div *ngIf="submitted || getControls().firstName.touched && getControls().firstName.invalid">
-                  <p *ngIf="getControls().firstName.errors?.required"   class="text-end" style="color:#05b396">Please enter Your first name</p>
-                  <p *ngIf="getControls().firstName.errors?.minlength"  class="text-end" style="color:#05b396">Minimum 3 Characters</p>
+                  <p *ngIf="getControls().firstName.errors?.required"   class="text-end" >Please enter Your first name</p>
+                  <p *ngIf="getControls().firstName.errors?.minlength"  class="text-end">Minimum 3 Characters</p>
                 </div>
 
                 <!------------------------------------------------last name------------------------------------------------>
@@ -24,26 +24,22 @@
                   <label for="floatingInput">Last Name</label>
                 </div>
                 <div *ngIf="submitted || getControls().lastName.touched && getControls().lastName.invalid">
-                  <p *ngIf="getControls().lastName.errors?.required"  class="text-end" style="color:#05b396">Please enter Your last name</p>
-                  <p *ngIf="getControls().lastName.errors?.minlength"  class="text-end" style="color:#05b396">Minimum 3 characters</p>
+                  <p *ngIf="getControls().lastName.errors?.required"  class="text-end" >Please enter Your last name</p>
+                  <p *ngIf="getControls().lastName.errors?.minlength"  class="text-end" >Minimum 3 characters</p>
                 </div>
 
                 <!-------------------------------------------------gender------------------------------------------------->
                 <div class="mb-3">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" value="male" id="male" formControlName="gender">
-                    <label class="form-check-label text-light fs-4" for="male">
-                      Male
-                    </label>
+                    <label class="form-check-label text-light fs-4" for="male"> Male </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" value="female" id="female" formControlName="gender">
-                    <label class="form-check-label text-light fs-4" for="gender">
-                      Female
-                    </label>
+                    <label class="form-check-label text-light fs-4" for="gender"> Female</label>
                 </div>
                 <div *ngIf="submitted || getControls().gender.touched && getControls().gender.invalid">
-                  <p *ngIf="getControls().gender.errors?.required"  class="text-end"  style="color:#05b396">Please enter gender</p>
+                  <p *ngIf="getControls().gender.errors?.required"  class="text-end" >Please enter gender</p>
                 </div>
                 </div>
 
@@ -53,7 +49,7 @@
                   <label for="dob">Date Of Birth</label>
                 </div>
                 <div *ngIf="submitted || getControls().dob.touched && getControls().dob.invalid">
-                  <p *ngIf="getControls().dob.errors?.required"   class="text-end" style="color:#05b396">Please enter Date Of Birth</p>
+                  <p *ngIf="getControls().dob.errors?.required"   class="text-end" >Please enter Date Of Birth</p>
                 </div>
 
                 <!---------------------------------------------------email--------------------------------------------------->
@@ -62,7 +58,7 @@
                   <label for="floatingInput">Email address</label>
                 </div>
                 <div *ngIf="submitted || getControls().email.touched && getControls().email.invalid">
-                  <p *ngIf="getControls().email.errors?.required"  class="text-end"  style="color:#05b396">Please enter Email address</p>
+                  <p *ngIf="getControls().email.errors?.required"  class="text-end"  >Please enter Email address</p>
                 </div>
 
                 <!------------------------------------------------password-------------------------------------------------->
@@ -72,8 +68,8 @@
                   <div class="form-text">* Password should contain minimum 6 char with one capital letter and one digit</div>
                 </div>
                 <div *ngIf="submitted || getControls().password.touched && getControls().password.invalid">
-                  <p *ngIf="getControls().password.errors?.required"   class="text-end" style="color:#05b396">Please enter password</p>
-                  <p *ngIf="getControls().password.errors?.minlength || getControls().password.errors?.pattern "  class="text-end" style="color:#05b396">Password invalid</p>
+                  <p *ngIf="getControls().password.errors?.required"   class="text-end" >Please enter password</p>
+                  <p *ngIf="getControls().password.errors?.minlength || getControls().password.errors?.pattern "  class="text-end" >Password invalid</p>
                 </div>
 
                 <!------------------------------------------------confirm -------------------------------------------------->
@@ -82,9 +78,9 @@
                   <label for="confirmPassword">Confirm Password</label>
                 </div>
                 <div *ngIf="submitted || getControls().cpassword.touched && getControls().cpassword.invalid">
-                  <p *ngIf="getControls().cpassword.errors?.required"  class="text-end" style="color:#05b396">Confirm Password</p>
+                  <p *ngIf="getControls().cpassword.errors?.required"  class="text-end" >Confirm Password</p>
                 </div>
-                <div *ngIf="getControls().cpassword.valid && getControls().cpassword.value != getControls().password.value"  class="text-end" style="color:#05b396">password not matched</div>
+                <div *ngIf="getControls().cpassword.valid && getControls().cpassword.value != getControls().password.value"  class="text-end" >password not matched</div>
                     
                 <!------------------------------------------------sign up button----------------------------------------------->
                     <div class="button text-center">

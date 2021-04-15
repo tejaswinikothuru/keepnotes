@@ -32,7 +32,8 @@ reminderApiObj.post("/createreminder",validateToken, errorHandler(async (req, re
             email:req.body.email,
             title: req.body.title,
             description: req.body.description,
-            checkList:req.body.checkList
+            checkList:req.body.checkList,
+            checkedList:req.body.checkedList
 
         })
 
@@ -53,8 +54,6 @@ reminderApiObj.post("/createreminder",validateToken, errorHandler(async (req, re
     else {
         res.send({ message: "Already added to reminder" })
     }
-
-
 }))
 
 
@@ -64,21 +63,22 @@ reminderApiObj.delete("/deletereminder/:email/:title",validateToken, errorHandle
     //deleting note in favouritesColl
     let fav = await Reminder.deleteOne({$and: [{email:req.params.email},{title:req.params.title}]})
             res.send({ message: "removed from reminders" })
-        
-
 }))
+
 
 //http://localhost:5000/reminder/removecheck/email
 reminderApiObj.put("/removecheck/:email",validateToken,errorHandler(async(req,res)=>{
     let check=await Reminder.findOne({$and:[{email:req.params.email},{title:req.body.title}]})
     let checkList=check.checkList
-
+    let checkedList=check.checkedList
 
     for(let [ind,i] of checkList.entries()){
         if(i==req.body.checkobj)
-        {  
+        {  //if checkobj matches in checkList array
+            checkedList.push(req.body.checkobj)
             checkList.splice(ind,1)
-            let result=await Reminder.updateOne({$and:[{email:req.params.email},{title:req.body.title}]},{checkList:checkList})
+             //updating checkList and checkedList
+            let result=await Reminder.updateOne({$and:[{email:req.params.email},{title:req.body.title}]},{checkList:checkList,checkedList:checkedList})
             let reminder=await Reminder.find({email:req.params.email})
             res.send({message:reminder})
             break;
@@ -86,6 +86,7 @@ reminderApiObj.put("/removecheck/:email",validateToken,errorHandler(async(req,re
     }
 }))  
 
+//http://localhost:5000/reminder/removechecked/email
 reminderApiObj.put("/removechecked/:email",validateToken,errorHandler(async(req,res)=>{
     let check=await Reminder.findOne({$and:[{email:req.params.email},{title:req.body.title}]})
     let checkedList=check.checkedList
@@ -95,21 +96,16 @@ reminderApiObj.put("/removechecked/:email",validateToken,errorHandler(async(req,
       
         if(i==req.body.checkedobj)
         {  
+            //if checkobj matches in checkedList array
           checkList.push(req.body.checkedobj)
-          console.log(checkList)
              checkedList.splice(ind,1)
-           
+             //updating checkList and checkedList
             let result=await Reminder.updateOne({$and:[{email:req.params.email},{title:req.body.title}]},{checkList:checkList,checkedList:checkedList})
-            let notes=await Reminder.find({$and:[{email:req.params.email},{status:true},{archive:true}]}) 
-            res.send({message:notes})
+            let reminder=await Reminder.find({email:req.params.email}) 
+            res.send({message:reminder})
             break;
-
-           
         }
-      
     }
-    
-
 }))  
 //export favouriteApiObj
 module.exports = reminderApiObj;

@@ -12,13 +12,15 @@ export class TrashComponent implements OnInit {
 trashData=[];
 trashHeading=false;
 emptyTrash=false;
-email
+email;
+username;
   constructor(private ns:NotesService,private TS:ToastrService,private router:Router) { }
 
   ngOnInit(): void {
+    this.username=localStorage.getItem("firstName")
      this.email=localStorage.getItem("email")
     this.ns.getTrashNotes(this.email).subscribe(res=>{
-      this.trashData=res["message"]
+     
        //if token not exists or session expired
        if(res["message"]=="failed")
        {
@@ -27,6 +29,7 @@ email
        }
        //if token exists
        else{
+        this.trashData=res["message"]
          if(this.trashData.length==0){
            this.emptyTrash=true;
           }
@@ -57,7 +60,6 @@ email
   }
 
   permanentDelete(delObj,ind){
-    console.log(delObj)
     this.ns.permanentDelete(delObj).subscribe(res=>{
      if(res["message"]=="failed"){
        alert(res["reason"])

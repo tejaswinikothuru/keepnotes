@@ -1,113 +1,156 @@
+<!--------------------navbar----------------->
+<div class="containerNav">
+    <app-navbar></app-navbar>
+</div>
+
+<span class="name  fs-5 text-end  d-md-none d-block ">Welcome, {{username}}</span>
+
 <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <img src="C:\Users\hp\Desktop\Imges\helpdescription.png"  alt="Click to add note">
-      </div>
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4 mt-5">
-        <h4>Click To add Note</h4>
+    <!------------------------homepage---------------->
+    <div class="row border border-3 ">
+        <div class="col-md-4 order-md-1 order-2 ">
+            <img src="assets/helpHomepage.png" alt="Home page" class="img-fluid">
+        </div>
+        <div class="col-md-8 order-md-2 order-1 mt-3">
+            <h4>Home page</h4>
+            <p>You can see two animated buttons <b>"Add Note"</b> and <b>"Add CheckList"</b> on Home page. Click the desirable button to create Note, or CheckList</p>
+        </div>
+    </div>
+<!-----------------------------Add note button------------------------------->
+    <div class="row border border-3 mt-3">
+        <div class="col-md-4 order-md-1 order-2">
+            <img src="assets/helpAddnote.png" alt="Click to add note"  class="img-fluid">
+        </div>
+        <div class="col-md-8 order-md-2 order-1 mt-3">
+            <h4>Add Note</h4>
+
+            <p>You can see an animated button <b>"Add Note"</b>. Click the button to create your note,
+                You can add title and description.<br><br>
+                You can find four icons select the required icon:</p>
+                <ul>
+                    <li>Save - Saves in Notes</li>
+                    <li>Reminder -Saves in Notes and Reminders</li>
+                    <li>Favourite - Saves in Notes and Favourites</li>
+                    <li>Cancel</li>
+                </ul>
+        </div>
+    </div>
+
+<!-----------------------------Add checklist--------------------------------------->
+    <div class="row  border border-3 mt-3">
+        <div class="col-md-4   order-md-1 order-2">
+            <img src="assets/helpAddlist.png"  alt="Click to add list"  class="img-fluid">
+        </div>
         
-        <p >You can see an animated button. Click the animated button to create note,You can add title and description.
-          You can find 4 buttons:</p>
-          <ul>
-            <li>Save</li>
-            <li>Reminder</li>
-            <li>Favourite</li>
-            <li>Cancel</li>
-          </ul>
-      </div>
+        <div class="col-md-8 order-md-2 order-1 mt-5">
+            <h4>Add list</h4>
+
+            <p>You can see an animated button <b>"Add CheckList"</b>. Click the animated button to create CheckList,
+                 You can add title and list.<br><br>
+                You can find four icons select the required icon:
+            </p>
+            <ul>
+                <li>Save - Saves in Notes</li>
+                    <li>Reminder -Saves in Notes and Reminders</li>
+                    <li>Favourite - Saves in Notes and Favourites</li>
+                    <li>Cancel</li>
+            </ul>
+        </div>
     </div>
- 
-
-  <div>
-      <img src="C:\Users\hp\Desktop\Imges\helpdescription.png" alt="">
-  </div>
-  
-     <div class="row">
-       <div class="col-sm-4">
-         <img src="C:\Users\hp\Desktop\Imges\helpdescription.png " alt="Notes Image">
-       </div>
-       <div class="col-sm-4"></div>
-       <div class="col-sm-4 mt-5">
-         <h4>Notes Page</h4>
-         <p>In this page, you can view all your saved notes.
-       This notes helps you in memorizing daily activities or the important information.</p>
-       </div>
-     </div>
-  
-    <div class="row">
-      <div class="col-sm-4">
-        <img src="C:\Users\hp\Desktop\Imges\helpdescription.png " alt="Reminder Image">
-      </div>
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4 mt-5">
-        <h4>Reminder Page</h4>
-        <p>You can use this option inorder to get reminders at the time you wanted to do your task, 
-          In this reminder page you can see all the notes which are to be reminded.</p>
-      </div>
+   
+<!-------------------------------notespage--------------------------------------->
+    <div class="row   border border-3 mt-3">
+        <div class="col-md-4  order-md-1 order-2">
+            <img src="assets/helpNotespage.png"  alt="Notes Image"  class="img-fluid">
+        </div>
+        <div class="col-md-8 order-md-2 order-1 mt-5">
+            <h4>Notes Page</h4>
+            <p>In this page, you can view all your saved notes.
+                This notes helps you in memorizing daily activities or the important information.<br><br>
+                You can remove the completed tasks or items in checklist by clicking on checkbox it will appear in checkedlist. 
+                If you want to undo from checkedlist simply click on the checkbox<br><br>
+                Any changes made to the list will reflect in favourites and reminders, if same list is there in favourites and reminders<br><br>
+                You can find four icons when you place your cursor on your note:</p>
+            <ul>
+                <li>Reminder - add to Reminders</li>
+                <li>Favourite - add to Favourites</li>
+                <li>Archive - Removes from Notes and add to Archives</li>
+                <li>Trash - add to Trash</li>
+            </ul>
+        </div>
     </div>
- 
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="C:\Users\hp\Desktop\Imges\helpdescription.png " alt="Notes Image">
+
+<!----------------------------------------Reminder page------------------------------->
+    <div class="row  border border-3 mt-3">
+        <div class="col-md-4  order-md-1 order-2">
+            <img src="assets/helpReminderpage.png"  alt="Reminder Image"  class="img-fluid">
+        </div>
+        <div class="col-md-8 order-md-2 order-1 mt-5">
+            <h4>Reminder Page</h4>
+            <p>You can use this option inorder to get reminders at the time you wanted to do your task,
+                In this reminder page you can see all the notes which are to be reminded.<br><br>
+                You can remove the completed tasks or items in checklist by clicking on checkbox it will appear in checkedlist. 
+                If you want to undo from checkedlist simply click on the checkbox<br><br>
+                Any changes made to the list will reflect in Notes and Favourites, if same list is there in Notes and Favourites<br><br>
+                 When you move cursor on to the note you can find <b>icon</b> to remove note from reminders</p>
+        </div>
     </div>
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4 mt-5">
-      <h4>Favourite Page</h4>
-      <p>All the notes which makes you happy or something special can be added to this Favourite page.</p>
-      <p>You can also unfavourite your notes in this page.</p>
+
+<!---------------------------------------------Favourite page------------------------------------->
+    <div class="row  border border-3 mt-3">
+        <div class="col-md-4  order-md-1 order-2">
+            <img src="assets/helpFavouritepage.png" alt="favourite Image"  class="img-fluid" >
+        </div>
+        <div class="col-md-8 order-md-2 order-1 mt-5">
+            <h4>Favourite Page</h4>
+            <p>All the notes which makes you happy or something special can be added to this Favourite page.<br><br>
+                You can remove the completed tasks or items in checklist by clicking on checkbox it will appear in checkedlist. 
+                If you want to undo from checkedlist simply click on the checkbox<br><br>
+                Any changes made to the list will reflect in Notes and Reminders, if same list is there in Notes and Reminders<br><br>
+            When you move cursor on to the note you can find <b>icon</b> to remove note from favourites</p>
+        </div>
     </div>
-  </div>
 
-<div class="row">
-  <div class="col-sm-4">
-    <img src="C:\Users\hp\Desktop\Imges\helpdescription.png " alt="Notes Image">
-  </div>
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4 mt-5">
-    <h4>Archive Page</h4>
-    <p>The notes which are not necessary to appear on the notes page can be archived.
-      you can find the archived content in this archive page</p>
-      <p>Notes can be unarchived whenever you required.</p>
-  </div>
-</div>
+ <!------------------------------------------Archive page----------------------------->   
+    <div class="row  border border-3 mt-3">
+        <div class="col-md-4  order-md-1 order-2">
+            <img src="assets/helpArchivepage.png" alt="Archive Image"  class="img-fluid">
+        </div>
+        <div class="col-md-8 order-md-2 order-1 mt-5">
+            <h4>Archive Page</h4>
+            <p>The notes which are not necessary to appear on the notes page can be archived.
+                you can find the archived content in this archive page<br><br>
+                You can remove the completed tasks or items in checklist by clicking on checkbox it will appear in checkedlist. 
+                If you want to undo from checkedlist simply click on the checkbox<br><br>
+                Any changes made to the list will reflect in Favourites and Reminders, if same list is there in Favourites and Reminders.<br><br>
+                When you move cursor on to the note you can find <b>icon</b> to remove note from Archives</p>
+        </div>
+    </div>
 
+<!-------------------------------------------Trash page------------------------------->    
+    <div class="row  border border-3 mt-3">
+        <div class="col-md-4  order-md-1 order-2">
+            <img src="assets/helpTrashpage.png" alt="Trash Image"  class="img-fluid">
+        </div>
+        <div class="col-md-8  order-md-2 order-1  mt-3">
+            <h4>Trash Page</h4>
+            <p>All the deleted notes appears in the trash page</p>
+            <p>In this trash you have two Buttons <br>
+            <h5>1.Restore</h5>
+            <p>You can restore your note whenever you want, it appears in "Notes page".</p>
 
+            <h5>2.Delete</h5>
+            <p>If you want to delete the note permenantly you can delete it.<br><br>You cannot edit here.</p>
+        </div>
+    </div>
 
-<div class="row">
-<div class="col-sm-4">
-  <img src="C:\Users\hp\Desktop\Imges\helpdescription.png" alt="Notes Image">
-</div>
-<div class="col-sm-4"></div>
-<div class="col-sm-4 mt-3">
-  <h4>Trash Page</h4>
-  <p>All the deleted notes appears in the trash page</p>
-  <p>In this trash you have two operations <br>
-    <h5>1.Restore</h5>
-         <p>You can restore your note whenever it is required.</p>
+ <!--------------------------------------------signout------------------------------>   
+    <div class="row text-center border border-3 mt-3">
     
-    <h5>2.Delete</h5>
-        <p>If you want to delete the notes permenantly you can delete it .</p>
+            <h4>SignOut</h4>
+            <p>You can signout whenever you want</p>
+             <p> <b>Note:</b> The session gets expired after certain time so dont get worried.
+                If you relogin you can view all your notes and further continue with your work.
+            </p>
+        </div>
 </div>
-</div>
-
-
-<div class="row">
-<div class="col-sm-4">
-  <img src="C:\Users\hp\Desktop\Imges\helpdescription.png" alt="Notes Image">
-</div>
-<div class="col-sm-4"></div>
-<div class="col-sm-4 mt-5">
-  <h4>SignOut</h4>
-  <p>You can logout whenever you want</p>
-</div>
-</div>
-
-
-
-
-<h6>Note: <p>The session gets expired after certain time so dont get worried. 
-    If you relogin you can view all your notes and further continue with your work.
-</p></h6>
-</div>
-<router-outlet></router-outlet>
